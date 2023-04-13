@@ -7,6 +7,7 @@ import com.amazonaws.services.cognitoidp.AWSCognitoIdentityProviderClientBuilder
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 
 @Configuration
 public class CognitoConfig {
@@ -14,6 +15,8 @@ public class CognitoConfig {
     private String accessKey;
     @Value(value="${aws.access-secret}")
     private String secretKey;
+
+    private String theAllowedOrigins = "http://127.0.0.1:5173";
 
     @Bean
     public AWSCognitoIdentityProvider cognitoClient(){

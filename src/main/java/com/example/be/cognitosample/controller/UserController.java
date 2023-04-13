@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin("http://127.0.0.1:5173")
 @RestController
 @RequestMapping(path = "/api/users")
 public class UserController {
@@ -81,6 +82,7 @@ public class UserController {
                                 .withSession(result.getSession());
                         AdminRespondToAuthChallengeResult resultChallenge = cognitoClient.adminRespondToAuthChallenge(request);
                         authenticationResult = resultChallenge.getAuthenticationResult();
+                        userSignInResponse.setUserName(userSignInRequest.getUsername());
                         userSignInResponse.setAccessToken(authenticationResult.getAccessToken());
                         userSignInResponse.setIdToken(authenticationResult.getIdToken());
 
@@ -95,6 +97,7 @@ public class UserController {
                 System.out.println("User has no challenge");
                 authenticationResult = result.getAuthenticationResult();
 
+                userSignInResponse.setUserName(userSignInRequest.getUsername());
                 userSignInResponse.setAccessToken(authenticationResult.getAccessToken());
                 userSignInResponse.setIdToken(authenticationResult.getIdToken());
                 userSignInResponse.setRefreshToken(authenticationResult.getRefreshToken());

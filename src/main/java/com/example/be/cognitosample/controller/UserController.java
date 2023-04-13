@@ -18,7 +18,7 @@ import java.util.Map;
 public class UserController {
     @Autowired
     private AWSCognitoIdentityProvider cognitoClient;
-    private SessionService sessionService;
+    private final SessionService sessionService;
     @Autowired
     public UserController(SessionService sessionService){this.sessionService = sessionService;}
     @Value(value="${aws.cognito.userPoolId}")
